@@ -1,0 +1,59 @@
+body {
+    font-family: "Lucida Console", Courier, monospace;
+    font-size: 200%;
+    background: #3f3f3f;
+    color: white;
+}
+
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#clock {
+    margin-top: 20px;
+    font-size: 400%;
+}
+
+#blinds {
+    font-size: 300%;
+}
+
+#structure {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 600px;
+    margin: auto;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.structure-item {
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.structure-item--active {
+    font-weight: bold;
+    border: 2px solid lightseagreen;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button {
+    margin: 10px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    padding: 0 20px;
+    font-size: 50%;
+}

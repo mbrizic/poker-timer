@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="index.css">
+    <title>Poker timer</title>
+</head>
+<body>
+
+    <div class="timer-container">
+        <div>
+            Level <span id="level">1</span>
+        </div>
+        <div>
+            Time remaining
+        </div>
+        <div id="clock"></div>
+        <div id="blinds">
+        </div>
+    </div>
+
+    <div id="structure">
+
+    </div>
+
+    <div class="actions">
+        <button onclick="onPauseTimerPressed()">PAUSE</button>
+        <button onclick="onStartTimerPressed()">START</button>
+        <button onclick="onPrevLevelPressed()">PREV</button>
+        <button onclick="onNextLevelPressed()">NEXT</button>
+    </div>
+    
+    <script src="src/model.js"></script>
+    <script src="src/index.js"></script>
+
+</body>
+</html>
