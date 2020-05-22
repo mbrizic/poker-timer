@@ -2,7 +2,9 @@ var DEFAULT_LEVEL_TIME = 10;
 var STARTING_TIME_MINUTES = DEFAULT_LEVEL_TIME;
 var STARTING_TIME_SECONDS = 00;
 
-function GameModel() {
+function GameModel(
+    sounds
+) {
     this.minutes = STARTING_TIME_MINUTES;
     this.seconds = STARTING_TIME_SECONDS;
     this.levelTime = DEFAULT_LEVEL_TIME;
@@ -13,7 +15,7 @@ function GameModel() {
         return this.levels[this.activeLevelStep - 1];
     }
 
-    this.onTimeDecrement = () => {
+    this.decrementTime = () => {
         this.seconds = this.seconds - 1
 
         if (this.seconds < 0) {
@@ -22,26 +24,41 @@ function GameModel() {
         }
 
         if (this.minutes == 0 && this.seconds == 00) {
-            this.onNextLevel()
+            this.goToNextLevel()
         }
     }
 
-    this.onNextLevel = () => {
+    this.goToNextLevel = () => {
         if (this.activeLevelStep == this.levels.length) {
             throw new Error("No further steps");
         }
 
         this.activeLevelStep = this.activeLevelStep + 1;
-        this.minutes = this.levelTime;
+        this.minutes = STARTING_TIME_MINUTES;
         this.seconds = 00;
+        announceLevel();
     }
 
-    this.onPrevLevel = () => {
+    this.goToPrevLevel = () => {
         if (this.activeLevelStep == 1) {
             throw new Error("This is the first step.");
         }
 
         this.activeLevelStep = this.activeLevelStep - 1;
+        announceLevel();
+    }
+
+    this.restart = () => {
+        this.minutes = STARTING_TIME_MINUTES;
+        this.seconds = STARTING_TIME_SECONDS;
+        this.levelTime = DEFAULT_LEVEL_TIME;
+        this.activeLevelStep = 1;
+    }
+
+    var announceLevel = () => {
+        var activeLevel = this.activeLevel();
+        var textToSpeak = `Level ${this.activeLevelStep}, the blinds are ${activeLevel.smallBlind} ${activeLevel.bigBlind}`;
+        sounds.readText(textToSpeak);
     }
 }
 
@@ -63,5 +80,3 @@ function generateLevelsFromBigBlinds(bigBlinds) {
         new Level(Math.floor(bb / 2), bb)
     )
 }
-
-var gameModel = new GameModel();

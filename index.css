@@ -1,7 +1,7 @@
 body {
     font-family: "Lucida Console", Courier, monospace;
     font-size: 200%;
-    background: #3f3f3f;
+    background: #242424;
     color: white;
 }
 
@@ -9,15 +9,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30px;
+    color: #797979;
 }
 
 #clock {
     margin-top: 20px;
     font-size: 400%;
+    color: white;
 }
 
 #blinds {
     font-size: 300%;
+    color: white;
 }
 
 #structure {
@@ -29,17 +33,18 @@ body {
     justify-content: space-around;
     flex-wrap: wrap;
     margin-top: 20px;
+    color: #797979;
 }
 
 .structure-item {
     border-radius: 10px;
-    margin: 10px;
-    padding: 5px;
+    margin: 0 10px;
+    padding: 10px;
 }
 
 .structure-item--active {
     font-weight: bold;
-    border: 2px solid lightseagreen;
+    color: white;
 }
 
 .actions {
