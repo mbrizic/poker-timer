@@ -8,9 +8,16 @@ function Sounds() {
     var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
     var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
-    this.readText = (text) => {
-        var audio = new Audio('files/blip.mp3');
+    this.playBlip = () => {
+        var audio = new Audio('assets/blip.mp3');
         audio.play();
+    }
+
+    this.readText = (text) => {
+        this.playBlip();
+
+        // stop any speech synthesis if in progress
+        speechSynthesis.cancel();
 
         var textToSpeak = new SpeechSynthesisUtterance(text);
         speechSynthesis.speak(textToSpeak);

@@ -3,13 +3,15 @@ var STARTING_TIME_MINUTES = DEFAULT_LEVEL_TIME;
 var STARTING_TIME_SECONDS = 00;
 
 function GameModel(
-    sounds
+    sounds,
+    blindsCalculator
 ) {
     this.minutes = STARTING_TIME_MINUTES;
     this.seconds = STARTING_TIME_SECONDS;
     this.levelTime = DEFAULT_LEVEL_TIME;
     this.activeLevelStep = 1;
-    this.levels = generateLevelsFromBigBlinds([20, 30, 40, 60, 100, 150, 200, 300, 400, 600, 800, 1000]);
+    this.isGameRunning = false;
+    this.levels = blindsCalculator.generateLevelsFromBigBlinds([10, 20, 30, 40, 60, 80, 100, 200, 250, 400, 600, 1000]);
 
     this.activeLevel = () => {
         return this.levels[this.activeLevelStep - 1];
@@ -30,7 +32,7 @@ function GameModel(
 
     this.goToNextLevel = () => {
         if (this.activeLevelStep == this.levels.length) {
-            throw new Error("No further steps");
+            extrapolateAndAddNewLevel()
         }
 
         this.activeLevelStep = this.activeLevelStep + 1;
@@ -48,11 +50,30 @@ function GameModel(
         announceLevel();
     }
 
+    this.pauseGame = () => {
+        this.isGameRunning = false;
+    }
+
+    this.startGame = () => {
+        this.isGameRunning = true;
+    }
+
     this.restart = () => {
         this.minutes = STARTING_TIME_MINUTES;
         this.seconds = STARTING_TIME_SECONDS;
         this.levelTime = DEFAULT_LEVEL_TIME;
         this.activeLevelStep = 1;
+    }
+
+    var extrapolateAndAddNewLevel = () => {
+        var lastLevel = getLastElement(this.levels);
+        var newLevel = copy(lastLevel);
+
+        newLevel.smallBlind = lastLevel.smallBlind * 2;
+        newLevel.bigBlind = lastLevel.bigBlind * 2;
+        newLevel.ante = lastLevel.ante * 2;
+
+        this.levels.push(newLevel)
     }
 
     var announceLevel = () => {
@@ -69,14 +90,10 @@ function Level(sb, bb, ante, length) {
     this.length = length || DEFAULT_LEVEL_TIME
 }
 
-function generateLevelsFromSmallBlinds(smallBlinds) {
-    return smallBlinds.map(sb =>
-        new Level(sb, sb * 2)
-    )
+Level.fromBigBlind = function (bb) {
+    return new Level(Math.floor(bb / 2), bb)
 }
 
-function generateLevelsFromBigBlinds(bigBlinds) {
-    return bigBlinds.map(bb =>
-        new Level(Math.floor(bb / 2), bb)
-    )
+Level.fromSmallBlind = (sb) => {
+    return new Level(sb, sb * 2)
 }

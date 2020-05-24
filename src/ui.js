@@ -5,15 +5,19 @@ function Ui(
     this.level = document.getElementById("level")
     this.blinds = document.getElementById("blinds")
     this.structure = document.getElementById("structure")
+    this.playPauseButtonImage = document.getElementById("playPauseButtonImage")
 
     this.update = () => {
         var activeLevel = gameModel.activeLevel()
+     
+        this.level.innerText = gameModel.activeLevelStep
+        this.timer.innerText = pad(gameModel.minutes) + ":" + pad(gameModel.seconds)
+        this.blinds.innerText = activeLevel.smallBlind + "/" + activeLevel.bigBlind
+        this.playPauseButtonImage.src = gameModel.isGameRunning 
+            ? "assets/pause.svg"
+            : "assets/play.svg"
 
-        ui.level.innerText = gameModel.activeLevelStep
-        ui.timer.innerText = pad(gameModel.minutes) + ":" + pad(gameModel.seconds)
-        ui.blinds.innerText = activeLevel.smallBlind + "/" + activeLevel.bigBlind
-
-        ui.structure.innerText = ''
+        this.structure.innerText = ''
         gameModel.levels.map((level, index) => {
             var textContent = level.smallBlind + "/" + level.bigBlind
             var div = document.createElement("div")
@@ -23,7 +27,7 @@ function Ui(
                 div.classList.add("structure-item--active")
             }
             div.appendChild(text);   
-            ui.structure.appendChild(div);
+            this.structure.appendChild(div);
         })
     }
 

@@ -56,9 +56,18 @@ body {
 
 button {
     margin: 10px;
-    height: 40px;
+    height: 50px;
+    width: 89px;
     border: none;
     border-radius: 10px;
-    padding: 0 20px;
+    padding: 0px 20px;
     font-size: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button > img {
+    height: 60%;
 }

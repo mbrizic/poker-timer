@@ -1,16 +1,20 @@
 function ConsoleInterface(
+    blindsCalculator,
     gameModel,
     ui
 ) {
-    this.generateGameFromBigBlinds = (blinds) => {
-        gameModel.levels = generateLevelsFromBigBlinds(blinds)
+    this.generateGameFromBigBlinds = (levelTime, blinds) => {
+        gameModel.levelTime = levelTime
+        gameModel.levels = blindsCalculator.generateLevelsFromBigBlinds(blinds)
         gameModel.restart()
         ui.update()
     }
 
-    this.generateGameFromSmallBlinds = (blinds) => {
-        gameModel.levels = generateLevelsFromSmallBlinds(blinds)
+    this.generateGameFromSmallBlinds = (levelTime, blinds) => {
+        gameModel.levelTime = levelTime
+        gameModel.levels = blindsCalculator.generateLevelsFromSmallBlinds(blinds)
         gameModel.restart()
         ui.update()
     }
+
 }

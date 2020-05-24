@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style/index.css">
     <title>Poker timer</title>
 </head>
 <body>
@@ -23,13 +23,20 @@
     </div>
 
     <div class="actions">
-        <button onclick="onPauseTimerPressed()">PAUSE</button>
-        <button onclick="onStartTimerPressed()">START</button>
-        <button onclick="onPrevLevelPressed()">PREV</button>
-        <button onclick="onNextLevelPressed()">NEXT</button>
+        <button onclick="onPrevLevelPressed()">
+            <img src="assets/chevron-left.svg"/>
+        </button>
+        <button onclick="onPlayPauseButtonPressed()">
+            <img id="playPauseButtonImage"/>
+        </button>
+        <button onclick="onNextLevelPressed()">
+            <img src="assets/chevron-right.svg"/>
+        </button>
     </div>
 
+    <script src="src/util.js"></script>
     <script src="src/sounds.js"></script>
+    <script src="src/blindscalculator.js"></script>
     <script src="src/consoleinterface.js"></script>
     <script src="src/model.js"></script>
     <script src="src/ui.js"></script>
