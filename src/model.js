@@ -1,6 +1,6 @@
 var DEFAULT_LEVEL_TIME = 10;
 var STARTING_TIME_MINUTES = DEFAULT_LEVEL_TIME;
-var STARTING_TIME_SECONDS = 00;
+var STARTING_TIME_SECONDS = 0;
 
 function GameModel(
     sounds,
@@ -36,8 +36,8 @@ function GameModel(
         }
 
         this.activeLevelStep = this.activeLevelStep + 1;
-        this.minutes = STARTING_TIME_MINUTES;
-        this.seconds = 00;
+        this.minutes = this.levelTime;
+        this.seconds = STARTING_TIME_SECONDS;
         announceLevel();
     }
 
@@ -47,6 +47,8 @@ function GameModel(
         }
 
         this.activeLevelStep = this.activeLevelStep - 1;
+        this.minutes = this.levelTime;
+        this.seconds = STARTING_TIME_SECONDS;
         announceLevel();
     }
 
@@ -59,9 +61,8 @@ function GameModel(
     }
 
     this.restart = () => {
-        this.minutes = STARTING_TIME_MINUTES;
+        this.minutes = this.levelTime;
         this.seconds = STARTING_TIME_SECONDS;
-        this.levelTime = DEFAULT_LEVEL_TIME;
         this.activeLevelStep = 1;
     }
 
