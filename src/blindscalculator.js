@@ -11,7 +11,11 @@ function BlindsCalculator() {
     }
 
     this.generateLevelsFromSmallBlinds = (smallBlinds) => {
-        if (!isAscending(smallBlinds)) {
+        if (smallBlinds == null || smallBlinds.length == 0) {
+	    throw new Error("smallBlinds is null")
+	}
+
+	if (!isAscending(smallBlinds)) {
             throw new Error("Blinds should be increasing.")
         }
 
@@ -21,7 +25,11 @@ function BlindsCalculator() {
     }
     
     this.generateLevelsFromBigBlinds = (bigBlinds) => {
-        if (!isAscending(bigBlinds)) {
+        if (bigBlinds == null || bigBlinds.length == 0) {
+	    throw new Error("bigBlinds is null")
+	}
+	
+	if (!isAscending(bigBlinds)) {
             throw new Error("Blinds should be increasing.")
         }
 
